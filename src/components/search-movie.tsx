@@ -1,13 +1,12 @@
 import React from "react";
 import { SearchIcon } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDebounce } from "@/hooks/use-debounce";
 import { Button } from "./ui/button";
 import {
   CommandDialog,
   CommandEmpty,
   CommandInput,
-  CommandItem,
   CommandList,
 } from "@/components/ui/command";
 import { searchMovieByName } from "@/services/TMDB/movies";
