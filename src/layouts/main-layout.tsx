@@ -1,4 +1,4 @@
-import { Header } from "@/components/header";
+import { Header } from "@/layouts/header";
 import { Outlet } from "react-router-dom";
 import { AuthProvider } from "@/context/auth-context";
 import { MovieProvider } from "@/context/movie-context";

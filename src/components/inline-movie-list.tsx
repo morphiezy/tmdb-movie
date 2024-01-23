@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { getNowPlayingMovies } from "@/services/TMDB/movies";
+import { MovieCard } from "./movie-card.tsx";
+import { MovieContentSkeleton } from "./skeleton/movie-content-skeleton.tsx";
 import type { Movie } from "@/types";
-import { MovieCard } from "./movie-card";
-import { NowPlayingMovieSkeleton } from "./skeleton/skeleton-now-playing-movie";
-import { ContainerMovie } from "./container-movie";
 
-export function NowPlayingMovie() {
+export function InlineMovieList({
+  title,
+  promiseMovie,
+}: {
+  title: string;
+  promiseMovie: () => Promise<Movie[]>;
+}) {
   const [data, setData] = useState<Movie[] | null>(null);
   const [error, setError] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(true);
@@ -15,7 +19,8 @@ export function NowPlayingMovie() {
   useEffect(() => {
     const getMovies = async () => {
       try {
-        const data = await getNowPlayingMovies();
+        const data = await promiseMovie();
+        console.log(data);
         setData(data);
       } catch (error) {
         const msg = (error as Error).message;
@@ -29,23 +34,22 @@ export function NowPlayingMovie() {
   }, []);
 
   if (loading) {
-    return <NowPlayingMovieSkeleton />;
+    return <MovieContentSkeleton />;
   }
 
   if (!loading && (!data?.length || error)) {
     return (
-      <ContainerMovie title="Now Playing">
-        <div className="w-full h-48 md:h-64 lg:h-80 grid place-items-center ">
-          <p className="text-sm text-muted-foreground text-center">
-            Cannot find the movie
-          </p>
-        </div>
-      </ContainerMovie>
+      <div className="w-full bg-muted/40 rounded-md h-48 md:h-64 lg:h-80 grid place-items-center ">
+        <p className="text-sm text-muted-foreground text-center">
+          There're no movies to show.
+        </p>
+      </div>
     );
   }
 
   return (
-    <ContainerMovie title="Now Playing">
+    <section className="w-full flex flex-col gap-4 lg:gap-6">
+      <h1 className="text-xl lg:text-2xl font-semibold">{title}</h1>
       <ScrollArea className="w-full whitespace-nowrap">
         <div className="flex w-max space-x-3 md:space-x-4 pb-6">
           {data?.map((movie) => (
@@ -58,6 +62,6 @@ export function NowPlayingMovie() {
         </div>
         <ScrollBar orientation="horizontal" />
       </ScrollArea>
-    </ContainerMovie>
+    </section>
   );
 }

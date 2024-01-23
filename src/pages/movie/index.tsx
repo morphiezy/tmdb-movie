@@ -1,13 +1,17 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useAuth } from "@/context/auth-context";
 import { getDetailMovie } from "@/services/TMDB/movies";
 import type { MovieDetail } from "@/types";
 import { toast } from "sonner";
 import { convertRuntimeMovieToTime } from "@/lib/utils";
 import { FavoriteButton } from "@/components/favorite-button";
 import { UpdateWatchlistButton } from "@/components/update-watchlist-button";
+import { InlineMovieList } from "@/components/inline-movie-list";
+import { getRecommendMovies } from "@/services/TMDB/movies";
 
 export function Movie() {
+  const { user } = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
   const [movie, setMovie] = useState<MovieDetail | null>(null);
   const params = useParams();
@@ -46,7 +50,7 @@ export function Movie() {
   }
 
   return (
-    <div className="text-white">
+    <div className="text-white ">
       <div className="relative w-full h-[550px] sm:h-[500px] lg:h-[450px] bg-muted">
         {movie?.backdrop_path && (
           <img
@@ -76,10 +80,12 @@ export function Movie() {
                   )}
                 </div>
               </div>
-              <div className="flex gap-4">
-                <UpdateWatchlistButton movie_id={movie?.id as number} />
-                <FavoriteButton movie_id={movie?.id as number} />
-              </div>
+              {!!user && (
+                <div className="flex gap-4">
+                  <UpdateWatchlistButton movie_id={movie?.id as number} />
+                  <FavoriteButton movie_id={movie?.id as number} />
+                </div>
+              )}
               <div className="space-y-2 text-sm lg:text-base">
                 <p className="italic">{movie?.tagline}</p>
                 <div className="space-y-1">
@@ -90,6 +96,12 @@ export function Movie() {
             </div>
           </div>
         </div>
+      </div>
+      <div className="container my-10 lg:my-16">
+        <InlineMovieList
+          promiseMovie={() => getRecommendMovies(movie?.id as number)}
+          title="Recommend Movies"
+        />
       </div>
     </div>
   );

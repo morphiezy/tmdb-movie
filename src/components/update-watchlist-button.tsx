@@ -36,7 +36,7 @@ export function UpdateWatchlistButton({
     if (user) {
       const isMovieWatchlist = async () => {
         const result = await findMovieInCollection(
-          "favorite",
+          "watchlist",
           user.account_id,
           movie_id,
         );

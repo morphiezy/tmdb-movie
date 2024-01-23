@@ -55,6 +55,7 @@ export function AuthProvider({ children }: { children: JSX.Element }) {
       await deleteSession();
       dispatch({ type: "LOGOUT" });
       navigate("/", { replace: true });
+      toast.success("Logout successfully");
     } catch (error) {
       toast.error((error as Error).message);
     }

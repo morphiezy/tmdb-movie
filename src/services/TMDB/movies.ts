@@ -12,12 +12,15 @@ export const searchMovieByName = async (name: string) => {
 };
 
 export const getNowPlayingMovies = async (): Promise<Movie[]> => {
-  try {
-    const response = await axios.get("/3/movie/now_playing");
-    return response.data.results;
-  } catch (error) {
-    throw new Error("Failed get now playing movie");
-  }
+  const response = await axios.get("/3/movie/now_playing");
+  return response.data.results;
+};
+
+export const getRecommendMovies = async (
+  movie_id: number,
+): Promise<Movie[]> => {
+  const response = await axios.get(`/3/movie/${movie_id}/recommendations`);
+  return response.data.results;
 };
 
 export const updateCollectionMovie = async (
