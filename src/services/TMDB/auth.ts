@@ -4,7 +4,7 @@ import type { AccessTokenResponse, RequestTokenResponse } from "@/types";
 
 export const requestToken = async (): Promise<void> => {
   const response = await axios.post("/4/auth/request_token", {
-    redirect_to: "http://localhost:5173",
+    redirect_to: import.meta.env.VITE_BASE_URL,
   });
 
   if (response.status !== 200 || !response.data?.success) {
