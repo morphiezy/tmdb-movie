@@ -20,7 +20,6 @@ export function InlineMovieList({
     const getMovies = async () => {
       try {
         const data = await promiseMovie();
-        console.log(data);
         setData(data);
       } catch (error) {
         const msg = (error as Error).message;

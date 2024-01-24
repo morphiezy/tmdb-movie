@@ -17,7 +17,7 @@ export function Header({ children }: { children?: React.ReactNode }) {
         >
           CINEMA
         </Link>
-        {children}
+        <div className="ml-10">{children}</div>
         <div className="flex-1 flex items-center justify-end gap-3">
           <SearchMovie />
           {auth.user ? <SignOutButton /> : <SignInButton />}

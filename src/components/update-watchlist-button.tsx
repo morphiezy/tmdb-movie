@@ -23,11 +23,13 @@ export function UpdateWatchlistButton({
     e.preventDefault();
 
     setLoading(true);
-    await movie.updateCollectionMovie({
+
+    await movie.updateCollection({
       status: !isWatchList,
       movie_id,
       category: "watchlist",
     });
+
     setWatchlist(!isWatchList);
     setLoading(false);
   };
@@ -49,6 +51,7 @@ export function UpdateWatchlistButton({
 
   return (
     <Button
+      name="update-watchlist-button"
       variant="ghost"
       className={cn(
         "hover:bg-transparent w-fit h-fit p-0 transition-all",

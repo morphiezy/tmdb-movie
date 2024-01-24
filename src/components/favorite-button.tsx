@@ -23,7 +23,7 @@ export function FavoriteButton({
     e.preventDefault();
 
     setLoading(true);
-    await movie.updateCollectionMovie({
+    await movie.updateCollection({
       status: !isFavorite,
       movie_id,
       category: "favorite",
@@ -49,6 +49,7 @@ export function FavoriteButton({
 
   return (
     <Button
+      name="update-favorite-button"
       variant="ghost"
       className={cn(
         "hover:bg-transparent w-fit h-fit p-0 transition-all duration-300",

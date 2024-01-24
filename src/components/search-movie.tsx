@@ -66,6 +66,7 @@ export function SearchMovie() {
   return (
     <>
       <Button
+        name="search-btn"
         variant="outline"
         size="icon"
         onClick={() => setIsOpen(true)}

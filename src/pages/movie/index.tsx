@@ -16,6 +16,8 @@ export function Movie() {
   const [movie, setMovie] = useState<MovieDetail | null>(null);
   const params = useParams();
 
+  console.log("movie render");
+
   useEffect(() => {
     if (params.id) {
       const getMovie = async () => {
@@ -51,7 +53,7 @@ export function Movie() {
 
   return (
     <div className="text-white ">
-      <div className="relative w-full h-[550px] sm:h-[500px] lg:h-[450px] bg-muted">
+      <div className="relative w-full h-[550px] sm:h-[500px] lg:h-[450px] bg-black">
         {movie?.backdrop_path && (
           <img
             src={`https://image.tmdb.org/t/p/w1280${movie?.backdrop_path}`}

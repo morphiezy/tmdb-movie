@@ -23,6 +23,11 @@ export const getRecommendMovies = async (
   return response.data.results;
 };
 
+export const getTopRatedMovies = async (): Promise<Movie[]> => {
+  const response = await axios.get(`/3/movie/top_rated`);
+  return response.data.results;
+};
+
 export const updateCollectionMovie = async (
   status: boolean,
   movie_id: number,
@@ -38,7 +43,7 @@ export const updateCollectionMovie = async (
 
     return response.data;
   } catch (error) {
-    throw new Error("Action failed");
+    throw new Error(`Failed update ${category} movie`);
   }
 };
 
@@ -47,6 +52,12 @@ export const getUserCollectionMovie = async (
   account_id: string,
 ): Promise<Movie[]> => {
   try {
+    const cacheMovies = JSON.stringify(String(localStorage.getItem(category)));
+
+    if (cacheMovies && typeof cacheMovies === "object") {
+      return cacheMovies;
+    }
+
     const response = await axios.get(
       `/3/account/${account_id}/${category}/movies`,
     );

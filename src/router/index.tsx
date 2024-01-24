@@ -4,6 +4,7 @@ import MainLayout from "@/layouts/main-layout";
 import Home from "@/pages/home";
 import SignIn from "@/pages/auth";
 import { Movie } from "@/pages/movie";
+import { FavoriteMovie } from "@/pages/movie/favorite";
 
 export const router = createBrowserRouter([
   {
@@ -15,6 +16,7 @@ export const router = createBrowserRouter([
         element: <SignIn />,
       },
       { path: "/movie/:id", element: <Movie /> },
+      { path: "/favorite", element: <FavoriteMovie /> },
     ],
   },
 ]);

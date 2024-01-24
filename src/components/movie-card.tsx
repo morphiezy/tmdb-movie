@@ -32,7 +32,7 @@ export function MovieCard({
       {!!data.poster_path && isVisible ? (
         <img
           src={`https://image.tmdb.org/t/p/w300${data.poster_path}`}
-          alt={data.title}
+          alt="movie poster"
           className="w-full h-full object-cover group-hover:grayscale transition-all duration-500"
           loading="lazy"
         />
