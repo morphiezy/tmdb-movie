@@ -3,15 +3,15 @@ import { getTopRatedMovies } from "@/services/TMDB/movies";
 import type { Movie } from "@/types";
 import { MovieCard } from "./movie-card";
 
-interface MovieListProps {
-  title: string;
-  promiseMovie: () => Promise<Movie[]>;
-}
+// interface MovieListProps {
+//   title: string;
+//   promiseMovie: () => Promise<Movie[]>;
+// }
 
 export function MovieList() {
   const [data, setData] = useState<Movie[] | null>(null);
-  const [error, setError] = useState<string | undefined>(undefined);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [, setError] = useState<string | undefined>(undefined);
+  // const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const getMovies = async () => {
