@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { MovieCard } from "./movie-card.tsx";
-import { MovieContentSkeleton } from "./skeleton/movie-content-skeleton.tsx";
+import { MovieCard } from "../ui/card/movie-card.tsx";
+import { MovieContentSkeleton } from "../skeleton/movie-content-skeleton.tsx";
 import type { Movie } from "@/types";
+import { ErrorFeedback } from "../ui/error-feedback.tsx";
 
 export function InlineMovieList({
   title,
@@ -38,11 +39,10 @@ export function InlineMovieList({
 
   if (!loading && (!data?.length || error)) {
     return (
-      <div className="w-full bg-muted/40 rounded-md h-48 md:h-64 lg:h-80 grid place-items-center ">
-        <p className="text-sm text-muted-foreground text-center">
-          There're no movies to show.
-        </p>
-      </div>
+      <ErrorFeedback
+        message="There are no movies to show"
+        className="h-48 md:h-64 lg:h-80"
+      />
     );
   }
 

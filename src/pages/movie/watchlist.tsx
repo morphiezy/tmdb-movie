@@ -1,9 +1,9 @@
 import { CollectionMovie } from "@/components/movie/collection-movie";
 
-export default function FavoriteMovie() {
+export default function Watchlist() {
   return (
     <div className="container py-6 lg:py-10">
-      <CollectionMovie title="Favorite Movies" collection="favorite" />
+      <CollectionMovie title="Watchlist Movies" collection="watchlist" />
     </div>
   );
 }

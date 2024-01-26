@@ -9,6 +9,7 @@ import {
   requestAccessToken,
   requestToken,
 } from "@/services/TMDB/auth";
+import instance from "@/services/client";
 
 interface AuthContextType {
   user: User | null;
@@ -44,6 +45,8 @@ export function AuthProvider({ children }: { children: JSX.Element }) {
         type: "AUTH_SUCCESS",
         payload: { account_id: data.account_id },
       });
+
+      return data.access_token;
     } catch (error) {
       dispatch({ type: "AUTH_FAILED", error: (error as Error).message });
       return Promise.reject("Authentication failed");
@@ -67,7 +70,12 @@ export function AuthProvider({ children }: { children: JSX.Element }) {
     if (requestToken) {
       toast.promise(getAccessToken, {
         loading: "Authenticating user...",
-        success: () => `Login success, welcome to cinema`,
+        success: (token) => {
+          instance.defaults.headers["common"] = {
+            Authorization: `Bearer ${token}`,
+          };
+          return `Login success, welcome to cinema`;
+        },
         error: (e) => e,
       });
     }

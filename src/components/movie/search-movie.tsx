@@ -2,7 +2,7 @@ import React from "react";
 import { SearchIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useDebounce } from "@/hooks/use-debounce";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button/button";
 import {
   CommandDialog,
   CommandEmpty,

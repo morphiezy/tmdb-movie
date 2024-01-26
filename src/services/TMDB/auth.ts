@@ -1,11 +1,16 @@
 import axios from "../client";
 import Cookies from "js-cookie";
 import type { AccessTokenResponse, RequestTokenResponse } from "@/types";
+import { ACCESS_TOKEN } from "@/constant";
 
 export const requestToken = async (): Promise<void> => {
-  const response = await axios.post("/4/auth/request_token", {
-    redirect_to: import.meta.env.VITE_BASE_URL,
-  });
+  const response = await axios.post(
+    "/4/auth/request_token",
+    {
+      redirect_to: import.meta.env.VITE_BASE_URL,
+    },
+    { headers: { Authorization: `Bearer ${ACCESS_TOKEN}` } },
+  );
 
   if (response.status !== 200 || !response.data?.success) {
     throw new Error("Authentication failed");
@@ -24,9 +29,13 @@ export const requestAccessToken = async (): Promise<AccessTokenResponse> => {
 
   if (!requestToken) throw new Error("Authentication failed");
 
-  const response = await axios.post("/4/auth/access_token", {
-    request_token: requestToken,
-  });
+  const response = await axios.post(
+    "/4/auth/access_token",
+    {
+      request_token: requestToken,
+    },
+    { headers: { Authorization: `Bearer ${ACCESS_TOKEN}` } },
+  );
 
   if (response.status !== 200 || !response.data?.success)
     throw new Error("Authentication failed");

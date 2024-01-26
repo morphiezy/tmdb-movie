@@ -1,6 +1,6 @@
-import { InlineMovieList } from "@/components/inline-movie-list";
+import { InlineMovieList } from "@/components/movie/inline-movie-list";
 import { getNowPlayingMovies } from "@/services/TMDB/movies";
-import { MovieList } from "@/components/movie-list";
+import { TopRatedMovie } from "@/components/movie/top-rated-movie";
 
 export default function Home() {
   return (
@@ -10,7 +10,7 @@ export default function Home() {
           promiseMovie={getNowPlayingMovies}
           title="Now Playing"
         />
-        <MovieList />
+        <TopRatedMovie />
       </div>
     </div>
   );

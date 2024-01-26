@@ -5,12 +5,12 @@ import { getDetailMovie } from "@/services/TMDB/movies";
 import type { MovieDetail } from "@/types";
 import { toast } from "sonner";
 import { convertRuntimeMovieToTime } from "@/lib/utils";
-import { FavoriteButton } from "@/components/favorite-button";
-import { UpdateWatchlistButton } from "@/components/update-watchlist-button";
-import { InlineMovieList } from "@/components/inline-movie-list";
+import { FavoriteButton } from "@/components/ui/button/update-favorite-button";
+import { UpdateWatchlistButton } from "@/components/ui/button/update-watchlist-button";
+import { InlineMovieList } from "@/components/movie/inline-movie-list";
 import { getRecommendMovies } from "@/services/TMDB/movies";
 
-export function Movie() {
+export default function Movie() {
   const { user } = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
   const [movie, setMovie] = useState<MovieDetail | null>(null);

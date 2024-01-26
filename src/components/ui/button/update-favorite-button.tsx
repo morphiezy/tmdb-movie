@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button } from "./ui/button";
+import { Button } from "./button";
 import { cn } from "@/lib/utils";
 import { useMovie } from "@/context/movie-context";
 import { findMovieInCollection } from "@/services/TMDB/movies";

@@ -1,5 +1,5 @@
 import { useAuth } from "@/context/auth-context";
-import { Button } from "../ui/button";
+import { Button } from "../ui/button/button";
 import { LogOutIcon } from "lucide-react";
 
 export function SignOutButton() {

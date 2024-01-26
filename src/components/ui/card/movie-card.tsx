@@ -2,8 +2,8 @@ import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Movie } from "@/types";
-import { FavoriteButton } from "./favorite-button";
-import { UpdateWatchlistButton } from "./update-watchlist-button";
+import { FavoriteButton } from "../button/update-favorite-button";
+import { UpdateWatchlistButton } from "../button/update-watchlist-button";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { useAuth } from "@/context/auth-context";
 
