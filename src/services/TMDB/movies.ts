@@ -31,7 +31,7 @@ export const getRecommendMovies = async (
 };
 
 export const getTopRatedMovies = async (): Promise<Movie[]> => {
-  const response = await axios.get(`/3/movie/top_rated`);
+  const response = await axios.get(`/3/movie/top_rated?api_key=${API_KEY}`);
   return response.data.results;
 };
 
