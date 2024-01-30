@@ -60,15 +60,13 @@ export default function Movie() {
         )}
         <div className="absolute inset-0 flex items-center">
           <div className="container mx-auto flex flex-col lg:flex-row items-center gap-5">
-            {!!movie?.poster_path && (
-              <div className="w-[140px] h-[180px] lg:w-[200px] lg:h-[300px] rounded-md overflow-hidden shrink-0">
-                <img
-                  src={`https://image.tmdb.org/t/p/w300${movie?.poster_path}`}
-                  alt="movie poster"
-                  className="w-full h-full object-cover movie-card"
-                />
-              </div>
-            )}
+            <div className="w-[140px] h-[180px] lg:w-[200px] lg:h-[300px] rounded-md overflow-hidden shrink-0">
+              <img
+                src={`https://image.tmdb.org/t/p/w300${movie?.poster_path}`}
+                alt="movie poster"
+                className="w-full h-full object-cover movie-card"
+              />
+            </div>
             <div className="flex flex-col gap-4 lg:gap-6">
               <div className="space-y-2">
                 <h1 className="text-xl lg:text-3xl font-bold">
