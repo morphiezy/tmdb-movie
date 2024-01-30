@@ -1,5 +1,5 @@
+import { Outlet, useLocation } from "react-router-dom";
 import { Header } from "@/layouts/header";
-import { Outlet } from "react-router-dom";
 import { useAuth } from "@/context/auth-context";
 import { Toaster } from "@/components/ui/sonner";
 import { SearchMovie } from "@/components/movie/search-movie";
@@ -7,9 +7,15 @@ import { SignInButton } from "@/components/auth/signin-button";
 import { SignOutButton } from "@/components/auth/signout-button";
 import { MainNav } from "@/components/navigation/main-nav";
 import { MobileNav } from "@/components/navigation/mobile-nav";
+import { useEffect } from "react";
 
 export default function MainLayout() {
   const { user } = useAuth();
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <>

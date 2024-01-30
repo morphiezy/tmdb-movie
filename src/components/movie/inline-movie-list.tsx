@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { MovieCard } from "../ui/card/movie-card.tsx";
@@ -31,7 +32,7 @@ export function InlineMovieList({
     };
 
     getMovies();
-  }, []);
+  }, [JSON.stringify(data)]);
 
   if (loading) {
     return <MovieContentSkeleton />;
@@ -51,13 +52,22 @@ export function InlineMovieList({
       <h1 className="text-xl lg:text-2xl font-semibold">{title}</h1>
       <ScrollArea className="w-full whitespace-nowrap">
         <div className="flex w-max space-x-3 md:space-x-4 pb-6">
-          {data?.map((movie) => (
-            <MovieCard
-              key={movie.id}
-              data={movie}
-              className="w-36 h-48 md:w-52 md:h-64 lg:w-60 lg:h-80"
-            />
-          ))}
+          <AnimatePresence>
+            {data?.map((movie) => (
+              <motion.div
+                animate={{ opacity: [0, 1] }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+                key={movie.id}
+              >
+                <MovieCard
+                  key={movie.id}
+                  data={movie}
+                  className="w-36 h-48 md:w-52 md:h-64 lg:w-60 lg:h-80"
+                />
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
         <ScrollBar orientation="horizontal" />
       </ScrollArea>

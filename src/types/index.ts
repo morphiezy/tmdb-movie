@@ -70,7 +70,7 @@ type BelongsToCollection = {
 
 export interface MovieDetail {
   adult: boolean;
-  backdrop_path: string | null;
+  backdrop_path?: string | null;
   belongs_to_collection: BelongsToCollection | null;
   budget: number;
   genres: Genre[];
@@ -81,7 +81,7 @@ export interface MovieDetail {
   original_title: string;
   overview: string | null;
   popularity: number;
-  poster_path: string | null;
+  poster_path?: string | null;
   production_companies: ProductionCompany[];
   production_countries: ProductionCountry[];
   release_date: string;

@@ -1,11 +1,21 @@
+import { flushSync } from "react-dom";
 import { useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Movie } from "@/types";
 import { FavoriteButton } from "../button/update-favorite-button";
 import { UpdateWatchlistButton } from "../button/update-watchlist-button";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { useAuth } from "@/context/auth-context";
+
+export interface PreDataMovieType {
+  backdrop_path: string;
+  poster_path: string;
+  title: string;
+  original_title: string;
+  overview: string;
+  release_data: string;
+}
 
 export function MovieCard({
   data,
@@ -14,18 +24,42 @@ export function MovieCard({
   data: Movie;
   className: string;
 }) {
+  const navigate = useNavigate();
   const ref = useRef<HTMLAnchorElement | null>(null);
   const entry = useIntersectionObserver(ref, {});
   const isVisible = !!entry?.isIntersecting;
 
   const { user } = useAuth();
 
+  const preMovieData: PreDataMovieType = {
+    backdrop_path: data.backdrop_path,
+    poster_path: data.poster_path,
+    title: data.title,
+    original_title: data.original_title,
+    overview: data.overview,
+    release_data: data.release_date,
+  };
+
+  const animateNavigation = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+
+    ref.current?.classList.add("movie-card");
+
+    document.startViewTransition(() => {
+      flushSync(() => {
+        ref.current?.classList.remove("movie-card");
+        navigate(`/movie/${data.id}`, { state: { movie: preMovieData } });
+      });
+    });
+  };
+
   return (
     <Link
       ref={ref}
       to={`/movie/${data.id}`}
+      onClick={animateNavigation}
       className={cn(
-        "block group relative rounded-sm overflow-hidden bg-muted",
+        "block group relative rounded-sm overflow-hidden bg-muted transition-all duration-500",
         className,
       )}
     >
