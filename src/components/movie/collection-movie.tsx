@@ -21,7 +21,7 @@ export function CollectionMovie({ title, collection }: CollectionMovieProps) {
     const getMovies = async () => {
       try {
         setLoading(true);
-        await movie.getCollection("favorite", user?.account_id as string);
+        await movie.getCollection(collection, user?.account_id as string);
       } catch (error) {
         setError("Something wrong.");
       } finally {

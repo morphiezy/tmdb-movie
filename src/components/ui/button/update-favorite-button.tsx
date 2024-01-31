@@ -21,6 +21,7 @@ export function FavoriteButton({
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     e.preventDefault();
+    e.stopPropagation();
 
     setLoading(true);
     await movie.updateCollection({

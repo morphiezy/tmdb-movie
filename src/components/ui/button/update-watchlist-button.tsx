@@ -21,6 +21,7 @@ export function UpdateWatchlistButton({
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     e.preventDefault();
+    e.stopPropagation();
 
     setLoading(true);
 

@@ -84,16 +84,18 @@ export default function Movie() {
                   )}
                 </div>
               </div>
-              <div className="min-h-[16px] lg:min-h-[20px] h-auto">
-                {!!user && !loading ? (
+
+              {!!user && !loading ? (
+                <div className="min-h-[16px] lg:min-h-[20px] h-auto">
                   <div className="flex gap-4">
                     <UpdateWatchlistButton movie_id={movie?.id as number} />
                     <FavoriteButton movie_id={movie?.id as number} />
                   </div>
-                ) : (
-                  false
-                )}
-              </div>
+                </div>
+              ) : (
+                false
+              )}
+
               <div className="space-y-2 text-sm lg:text-base">
                 {loading ||
                   (movie?.tagline && (
